@@ -1,8 +1,5 @@
 <template>
   <div>
-    <router-link to="/boxes" class="linea"
-      ><v-icon>mdi-arrow-left</v-icon></router-link
-    >
     <v-card class="target" max-width="400">
       <v-img
         class="white--text align-end"
@@ -23,10 +20,10 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn icon color="#1095cd" to="#">
+        <v-btn icon color="#25b535" to="#">
           <v-icon>mdi-portal-enter</v-icon>Try a class
         </v-btn>
-        <v-btn icon color="#1095cd">
+        <v-btn icon color="#25b535">
           <v-icon class="iconoCorazon">mdi-heart</v-icon>
         </v-btn>
       </v-card-actions>

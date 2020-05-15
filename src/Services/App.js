@@ -31,15 +31,36 @@ export default {
     })
     return response.data
   },
+  async updateProfile(userUpdates) {
+    const response = await API.put('/me', userUpdates, {
+      headers: {
+        token: localStorage.token // eslint-disable-line
+      }
+    })
+    return response.data
+  },
+  async changePassword(newPassword) {
+    const response = await API.put('/me/password', newPassword, {
+      headers: {
+        token: localStorage.token // eslint-disable-line
+      }
+    })
+    return response.data
+  },
 
-  async getAllBoxes(country, province) {
+  async deleteProfile(userId) {
+    const response = await API.delete('/me', {
+      headers: {
+        token: localStorage.token // eslint-disable-line
+      }
+    })
+    return response.data
+  },
+
+  async getAllBoxes(country) {
     let url = '/boxes?'
-    if (country && province) {
-      url += `country=${country}&province=${province}`
-    } else if (country) {
+    if (country) {
       url += `country=${country}`
-    } else if (province) {
-      url += `province=${province}`
     }
     const response = await API.get(url)
     return response.data

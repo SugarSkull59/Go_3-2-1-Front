@@ -1,9 +1,9 @@
 <template>
   <div>
     <router-link to="/news" class="linea"
-      ><v-icon>mdi-arrow-left</v-icon></router-link
+      ><v-icon color="#25b535">mdi-chevron-triple-left </v-icon><v-icon color="#25b535">mdi-chevron-triple-left </v-icon></router-link
     >
-    <v-card class="target" max-width="400">
+    <v-card :justify="$vuetify.breakpoint.mdAndUp ? 'center' : 'center'" class="tarjeta" max-width="700" >
       <v-img
         class="white--text align-end"
         height="200px"
@@ -33,6 +33,7 @@ export default {
   },
   async created() {
     const noticia = await API.getNoticia(this.$route.params.id);
+    console.log(noticia);
     this.noticia = noticia;
   }
 };

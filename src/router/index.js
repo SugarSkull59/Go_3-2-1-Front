@@ -5,6 +5,11 @@ import Boxes from '../views/Boxes.vue'
 import Box from '../views/Box.vue'
 import News from '../views/News.vue'
 import Noticia from '../views/Noticia.vue'
+import Crossfit from '../views/Crossfit.vue'
+import Signup from '../views/Crossfit.vue'
+import Auth from '../views/Auth.vue'
+import Profile from '../views/EditProfile.vue'
+
 
 
 Vue.use(VueRouter)
@@ -16,12 +21,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/auth',
+    name: 'Auth',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: Auth
   },
   {
     path: '/boxes',
@@ -42,6 +47,16 @@ const routes = [
     path: "/news/:id",
     name: "Noticia",
     component: Noticia
+  },
+  {
+    path: "/crossfit",
+    name: "Crossfit",
+    component: Crossfit
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile
   }
 ]
 

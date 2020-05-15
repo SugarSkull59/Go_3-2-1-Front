@@ -1,5 +1,12 @@
 <template>
 <v-container mt-5>
+<div  class="input-container">
+    <v-icon>mdi-magnify</v-icon>
+    <input type="text" placeholder="Country" v-model="country"/>
+</div>
+
+    <v-btn class="btnSearch" width="75px" small color="#7dee8a" @click="searchBox">Search</v-btn>
+
   <v-row >
     <v-col class="pa-0" v-for="(box, i) in boxes" :key="i" cols="12" sm="6" md="6" lg="6">
     <v-card class="mr-1 ml-1 mt-4 card"
@@ -24,9 +31,10 @@
          <v-btn text color="cyan darken-4" :to="{ name: 'Box', params: { id: box._id } }" >See more<v-icon  size="30px" color="#25b535"
          >mdi-dumbbell</v-icon></v-btn>
       </v-card>
-
     </v-col>
   </v-row>
+  </div>
+</div>
   <v-row justify="center">
   <v-btn max-height="25px" color="#25b535" class="mt-10 pr-1 pl-1" x-large @click="toTop" dark>Volver al principio <v-icon class="ml-3">mdi-arrow-up-circle</v-icon> </v-btn>
   </v-row>
@@ -38,13 +46,15 @@ import API from '../Services/App'
 export default {
   data: () => ({
     boxes: Array,
-    country:'',
-    province: ''
+    country:''
+
   }),
   methods: {
-    filterTypes () {
-      API.getAllBoxes(this.country, this.province)
-      .then(response => (this.boxes = response))
+   async searchBox () {
+      API.getAllBoxes(this.country)
+      .then(response => (this.boxes = response)
+      );
+      await (this.country = '')
     },
     box(){
     API.getBox(`/boxes/${boxId}`);
@@ -60,7 +70,7 @@ export default {
     }
   },
   created () {
-    API.getAllBoxes(this.country, this.province).then(
+    API.getAllBoxes(this.country).then(
         response => (this.boxes = response))
     }
 }
@@ -94,5 +104,20 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 350px;
+}
+
+
+.input-container {
+	border-radius: 5px;
+	background: #f7d184;
+  width: 50%;
+  margin: auto;
+  display: block;
+
+}
+
+.btnSearch {
+  margin: auto;
+  display: block;
 }
 </style>

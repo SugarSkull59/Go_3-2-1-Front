@@ -1,5 +1,11 @@
 <template>
 <v-container mt-5>
+  <div  class="input-container">
+    <v-icon>mdi-magnify</v-icon>
+    <input type="text" placeholder="yyyy-mm-dd" v-model="date"/>
+</div>
+    <v-btn class="btnSearch" width="75px" small color="#7dee8a" @click="searchNews">Search</v-btn>
+
   <v-row >
     <v-col class="pa-0" v-for="(noticia, i) in news" :key="i" cols="12" sm="6" md="6" lg="12">
   <v-card
@@ -7,12 +13,8 @@
     class="mx-auto my-12"
     max-height="350"
   >
-
     <v-card-title>{{noticia.title}}</v-card-title>
-
     <v-card-text>
-
-
       <div class="my-4 subtitle-1">
       Date: {{noticia.date}}
       </div>
@@ -24,11 +26,10 @@
 
     <v-card-actions>
       <v-btn
-        color="deep-purple lighten-2"
+        color="#25b535"
         text
         :to="{ name: 'Noticia', params: { id: noticia._id } }"
-      >
-        Read more
+      >Read more
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -45,9 +46,13 @@ export default {
     date: null,
   }),
   methods: {
-    filterNoticas () {
+   async searchNews () {
       API.getAllNoticias(this.date)
-      .then(response => (this.news = response))
+      .then(response => (this.news = response)
+      );
+    await (this.date = '')
+
+
     },
     noticia(){
     API.getNoticia(`/news/${noticiaId}`);
@@ -97,5 +102,18 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 350px;
+}
+.input-container {
+	border-radius: 5px;
+	background: #f7d184;
+  width: 50%;
+  margin: auto;
+  display: block;
+
+}
+
+.btnSearch {
+  margin: auto;
+  display: block;
 }
 </style>
